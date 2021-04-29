@@ -91,25 +91,42 @@ def create_csv():
 def run():
     total_pages = login()
 
-    options = int(input('Input option number:\n1. Collecting all URLs\n2.Get detail all product\n3.Create CSV\nWhat you choose : '))
-    if options == 1:
-        total_urls = []
-        for i in range(total_pages):
-            page = i+1
-            urls = get_urls(page)
-            total_urls += urls  #total_urls = total_urls + urls
+    total_urls = []
+    for i in range(total_pages):
+        page = i+1
+        urls = get_urls(page)
+        total_urls += urls #total_urls = total_urls + urls
         with open('all_urls.json', 'w') as outfile:
             json.dump(total_urls, outfile)
 
-    elif options == 2:
-        with open('all_urls.json') as json_file:
-            data = json.load(json_file)
+    with open('all_urls.json') as json_file:
+        data = json.load(json_file)
 
         for url in data:
             get_detail(url)
 
-    elif options == 3:
-        create_csv()
+    create_csv()
+
+
+    # options = int(input('Input option number:\n1. Collecting all URLs\n2.Get detail all product\n3.Create CSV\nWhat you choose : '))
+    # if options == 1:
+    #     total_urls = []
+    #     for i in range(total_pages):
+    #         page = i+1
+    #         urls = get_urls(page)
+    #         total_urls += urls  #total_urls = total_urls + urls
+    #     with open('all_urls.json', 'w') as outfile:
+    #         json.dump(total_urls, outfile)
+    #
+    # elif options == 2:
+    #     with open('all_urls.json') as json_file:
+    #         data = json.load(json_file)
+    #
+    #     for url in data:
+    #         get_detail(url)
+    #
+    # elif options == 3:
+    #     create_csv()
 
 
 if __name__ == '__main__':
